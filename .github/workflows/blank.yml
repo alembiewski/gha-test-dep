@@ -7,8 +7,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - name: mask
+        run: echo "::add-mask::${{ github.event.client_payload.cluster_conf_encoded }}"
       - name: Decode cluster.conf
         run: |
-          echo "::add-mask::${{ github.event.client_payload.cluster_conf_encoded }}"
           echo "${{ github.event.client_payload.cluster_conf_encoded }}" | base64 -d >> cluster.conf
           cat cluster.conf
