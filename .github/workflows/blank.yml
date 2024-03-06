@@ -11,7 +11,7 @@ jobs:
         id: mask
         shell: bash
         run: |
-          cluster_conf_encoded="${{ github.event.client_payload.cluster_conf_encoded }}"
+          cluster_conf_encoded=$(jq -r '.client_payload.cluster_conf_encoded' $GITHUB_EVENT_PATH)
           echo "::add-mask::$cluster_conf_encoded"
       - name: Decode cluster.conf
         run: |
