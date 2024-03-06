@@ -10,5 +10,5 @@ jobs:
         with:
           ref: ${{ github.event.client_payload.ref }}
       - run: |
-          echo ${{ github.event.client_payload.cluster_conf_encoded }} | base64 -d >> cluster.conf
+          echo "${{ github.event.client_payload.cluster_conf_encoded }}" | base64 -d >> cluster.conf
           cat cluster.conf
