@@ -7,8 +7,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-        with:
-          ref: ${{ github.event.client_payload.ref }}
       - run: |
-          echo "${{ github.event.client_payload.cluster_conf_encoded }}" | base64 -d >> cluster.conf
+          cluster_conf_encoded=${{ github.event.client_payload.cluster_conf_encoded }}
+          echo "::add-mask::$cluster_conf_encoded"
+          echo "$cluster_conf_encoded" | base64 -d >> cluster.conf
           cat cluster.conf
